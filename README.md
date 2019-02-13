@@ -11,8 +11,11 @@ Run local HTTP server on port 8000.
 npm install -g local-web-server
 
 Then change folder to Restaurant-Review and run:
+
 ws 
+
 And you should see:
+
 Serving at http://mbp.local:8000, http://127.0.0.1:8000, http://192.168.0.100:8000
 
 ## Dependencies
