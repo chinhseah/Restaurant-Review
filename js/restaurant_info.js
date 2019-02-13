@@ -31,6 +31,11 @@ initMap = () => {
       }).addTo(newMap);
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
+      // Skip tab for links in leaflet-control-attribution
+      let lca = document.getElementsByClassName('leaflet-control-attribution')[0];
+      for (let i=0; i<lca.children.length; i++){
+        lca.children[i].setAttribute('tabindex', '-1');
+      }
     }
   });
 }
@@ -47,6 +52,7 @@ initMap = () => {
       });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+      removeMapTabIndex();
     }
   });
 } */
@@ -82,16 +88,20 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  name.setAttribute("tabindex","0"); // allow focusable
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
+  address.setAttribute("tabindex","0"); // allow focusable
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = "Image of "+ restaurant.name + " restaurant";
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
+  cuisine.setAttribute("tabindex","0"); // allow focusable
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -106,6 +116,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
+  hours.setAttribute("tabindex","0"); // allow focusable
   for (let key in operatingHours) {
     const row = document.createElement('tr');
 
@@ -128,6 +139,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
+  title.setAttribute("tabindex", "0"); // allow focusable
   container.appendChild(title);
 
   if (!reviews) {
@@ -149,6 +161,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
+  li.setAttribute("tabindex","0"); // allow focusable
   name.innerHTML = review.name;
   li.appendChild(name);
 

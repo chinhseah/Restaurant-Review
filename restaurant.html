@@ -19,37 +19,35 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <nav>
-      <ul id="breadcrumb" >
-        <li><a href="/">Home</a></li>
-      </ul>
-    </nav>
+    <ul id="breadcrumb" >
+      <li><a href="/">Home</a></li>
+    </ul>
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
   <!-- End header -->
-
   <!-- Beginning main -->
   <main id="maincontent">
+    <!-- Beginning map -->
+    <section id="map-container" aria-labelledby="map-aria-description" role="application">
+      <div id="map"></div>
+    </section>
+    <label id="map-aria-description" class="aria-label">Mapbox</label>
+    <!-- End map -->
     <!-- Beginning restaurant -->
-    <section id="restaurant-container">
+    <section id="restaurant-container" tabindex="0">
       <h1 id="restaurant-name"></h1>
       <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
       <p id="restaurant-address"></p>
-      <!-- Beginning map -->
-      <section id="map-container">
-        <div id="map"></div>
-      </section>
-      <!-- End map -->
-      <table id="restaurant-hours"></table>
-    </section>
+      <table id="restaurant-hours" role="presentation"></table>
+      <!-- Beginning reviews -->
+      <div id="reviews-container">
+        <ul id="reviews-list" role="presentation"></ul>
+      </div>
+      <!-- End reviews -->
     <!-- end restaurant -->
-    <!-- Beginning reviews -->
-    <section id="reviews-container">
-      <ul id="reviews-list"></ul>
     </section>
-    <!-- End reviews -->
   </main>
   <!-- End main -->
 
