@@ -16,26 +16,31 @@ initMap = () => {
     if (error) { // Got an error!
       console.error(error);
     } else {
-      self.newMap = L.map('map', {
-        center: [restaurant.latlng.lat, restaurant.latlng.lng],
-        zoom: 16,
-        scrollWheelZoom: false
-      });
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-        mapboxToken: 'pk.eyJ1Ijoic2VhaGNoaW4iLCJhIjoiY2pyd2dreDJtMGNoajRhbXQya3kzZ2FtZSJ9.jq1SC4FSezg-n3S9mzhNmA',
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox.streets'
-      }).addTo(newMap);
-      fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
-      // Skip tab for links in leaflet-control-attribution
-      let lca = document.getElementsByClassName('leaflet-control-attribution')[0];
-      for (let i=0; i<lca.children.length; i++){
-        lca.children[i].setAttribute('tabindex', '-1');
+      if (typeof L !== 'undefined') {
+        self.newMap = L.map('map', {
+          center: [restaurant.latlng.lat, restaurant.latlng.lng],
+          zoom: 16,
+          scrollWheelZoom: false
+        });
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
+          mapboxToken: 'pk.eyJ1Ijoic2VhaGNoaW4iLCJhIjoiY2pyd2dreDJtMGNoajRhbXQya3kzZ2FtZSJ9.jq1SC4FSezg-n3S9mzhNmA',
+          maxZoom: 18,
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          id: 'mapbox.streets'
+        }).addTo(newMap);
+        DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
+        // Skip tab for links in leaflet-control-attribution
+        let lca = document.getElementsByClassName('leaflet-control-attribution')[0];
+        for (let i=0; i<lca.children.length; i++){
+          lca.children[i].setAttribute('tabindex', '-1');
+        }
+      } else {
+        document.getElementById('map').innerHTML =
+          "<h2>Map is currently unavailable.</2>";
       }
+      fillBreadcrumb();
     }
   });
 }
