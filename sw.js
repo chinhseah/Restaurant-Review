@@ -1,4 +1,4 @@
-var CACHE_NAME = 'restaurant-site-cache-v1';
+const CACHE_NAME = 'restaurant-site-cache-v1';
 var urlsToCache = [
   '/',
   '/index.html',
