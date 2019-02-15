@@ -2,11 +2,17 @@
 
 ## Description
 Restaurant review web site listing a few restaurants on a map and reviews.
+
 (Class project for Udacity Front-End Development)
+
+![Restaurants](img/app.png)
+
+![Restaurant Reviews](img/app_reviews.png)
 
 ## How to run?
 Run local HTTP server on port 8000.
-###Install npm local-web-server
+
+Install npm local-web-server
 
 npm install -g local-web-server
 
